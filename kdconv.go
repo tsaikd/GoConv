@@ -3,6 +3,7 @@ package kdconv
 import (
 	"fmt"
 	"reflect"
+	"strconv"
 	"time"
 )
 
@@ -39,6 +40,12 @@ func IntDef(data interface{}, def int) int {
 		return int(field.Int())
 	case float32, float64:
 		return int(field.Float())
+	case string:
+		i, err := strconv.ParseInt(field.String(), 10, 32)
+		if err != nil {
+			panic(err)
+		}
+		return int(i)
 	}
 	panic(fmt.Errorf("Convert type failed"))
 }
@@ -57,6 +64,12 @@ func Int64Def(data interface{}, def int64) int64 {
 		return field.Int()
 	case float32, float64:
 		return int64(field.Float())
+	case string:
+		i, err := strconv.ParseInt(field.String(), 10, 64)
+		if err != nil {
+			panic(err)
+		}
+		return int64(i)
 	}
 	panic(fmt.Errorf("Convert type failed"))
 }
@@ -75,6 +88,12 @@ func FloatDef(data interface{}, def float32) float32 {
 		return float32(field.Int())
 	case float32, float64:
 		return float32(field.Float())
+	case string:
+		f, err := strconv.ParseFloat(field.String(), 32)
+		if err != nil {
+			panic(err)
+		}
+		return float32(f)
 	}
 	panic(fmt.Errorf("Convert type failed"))
 }
@@ -89,7 +108,7 @@ func StringDef(data interface{}, def string) string {
 	}
 	field := reflect.ValueOf(data)
 	switch field.Interface().(type) {
-	case int, int8, int16, int32, int64:
+	case int, int8, int16, int32, int64, float32, float64:
 		return fmt.Sprint(data)
 	case string:
 		return field.String()

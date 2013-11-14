@@ -65,6 +65,11 @@ func Test_Int(t *testing.T) {
 	if defInt != convData {
 		t.Error("convData:", convData, "except:", defInt)
 	}
+
+	convData = Int(String(defInt))
+	if defInt != convData {
+		t.Error("convData:", convData, "except:", defInt)
+	}
 }
 
 func Test_Int64(t *testing.T) {
@@ -108,6 +113,11 @@ func Test_Int64(t *testing.T) {
 	if defInt64 != convData {
 		t.Error("convData:", convData, "except:", defInt64)
 	}
+
+	convData = Int64(String(defInt64))
+	if defInt64 != convData {
+		t.Error("convData:", convData, "except:", defInt64)
+	}
 }
 
 func Test_Float(t *testing.T) {
@@ -148,6 +158,11 @@ func Test_Float(t *testing.T) {
 
 	defFloat := float32(105)
 	convData = FloatDef(nil, defFloat)
+	if defFloat != convData {
+		t.Error("convData:", convData, "except:", defFloat)
+	}
+
+	convData = Float(String(defFloat))
 	if defFloat != convData {
 		t.Error("convData:", convData, "except:", defFloat)
 	}
