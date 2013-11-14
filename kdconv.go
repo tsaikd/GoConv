@@ -65,6 +65,24 @@ func Int64(data interface{}) int64 {
 	return Int64Def(data, 0)
 }
 
+func FloatDef(data interface{}, def float32) float32 {
+	if data == nil {
+		return def
+	}
+	field := reflect.ValueOf(data)
+	switch field.Interface().(type) {
+	case int, int8, int16, int32, int64:
+		return float32(field.Int())
+	case float32, float64:
+		return float32(field.Float())
+	}
+	panic(fmt.Errorf("Convert type failed"))
+}
+
+func Float(data interface{}) float32 {
+	return FloatDef(data, 0)
+}
+
 func StringDef(data interface{}, def string) string {
 	if data == nil {
 		return def

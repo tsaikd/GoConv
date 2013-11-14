@@ -110,6 +110,49 @@ func Test_Int64(t *testing.T) {
 	}
 }
 
+func Test_Float(t *testing.T) {
+	convData := Float(nil)
+	if float32(0) != convData {
+		t.Error("convData:", convData, "except:", 0)
+	}
+
+	dataInt := int(100)
+	convData = Float(dataInt)
+	if float32(dataInt) != convData {
+		t.Error("convData:", convData, "except:", dataInt)
+	}
+
+	dataInt8 := int8(101)
+	convData = Float(dataInt8)
+	if float32(dataInt8) != convData {
+		t.Error("convData:", convData, "except:", dataInt8)
+	}
+
+	dataInt16 := int16(102)
+	convData = Float(dataInt16)
+	if float32(dataInt16) != convData {
+		t.Error("convData:", convData, "except:", dataInt16)
+	}
+
+	dataInt32 := int32(103)
+	convData = Float(dataInt32)
+	if float32(dataInt32) != convData {
+		t.Error("convData:", convData, "except:", dataInt32)
+	}
+
+	dataInt64 := int64(104)
+	convData = Float(dataInt64)
+	if float32(dataInt64) != convData {
+		t.Error("convData:", convData, "except:", dataInt64)
+	}
+
+	defFloat := float32(105)
+	convData = FloatDef(nil, defFloat)
+	if defFloat != convData {
+		t.Error("convData:", convData, "except:", defFloat)
+	}
+}
+
 func Test_String(t *testing.T) {
 	convData := String(nil)
 	if "" != convData {
